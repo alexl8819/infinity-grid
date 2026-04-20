@@ -25,7 +25,7 @@ class MatrixNotificationChannelAdapter(INotificationChannel):
         self.__base_url = proxy_api
         self.__channel = channel
 
-    def send(self: self, message: str) -> bool:
+    def send(self: Self, message: str) -> bool:
         LOG.debug("Sending Matrix notification: %s", message)
         try:
             response = requests.post(
