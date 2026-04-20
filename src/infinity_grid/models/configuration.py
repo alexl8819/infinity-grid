@@ -144,10 +144,21 @@ class TelegramConfigDTO(BaseModel):
         """Return True if both token and chat_id are truthy values."""
         return bool(self.token and self.chat_id)
 
+class HttpConfigDTO(BaseModel):
+    """Pydantic model for HTTP notification configuration """
+
+    proxy_http_api: str | None = None
+    channel: str | None = None
+
+    @computed_field
+    def enabled(self) -> bool:
+        """ Return True if proxy_http_api and channel are truthy values. """
+        return bool(self.proxy_http_api and self.channel)
 
 class NotificationConfigDTO(BaseModel):
     """Pydantic model for notification service configuration."""
 
+    http: HttpConfigDTO
     telegram: TelegramConfigDTO
 
 
