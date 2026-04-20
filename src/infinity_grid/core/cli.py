@@ -360,6 +360,18 @@ def cli(ctx: Context, **kwargs: dict) -> None:
 @option_group(
     "Notification Options",
     option(
+        "--proxy-http-api",
+        required=False,
+        type=STRING,
+        help="The http proxy api url to use.",
+    ),
+    option(
+        "--http-channel",
+        required=False,
+        type=STRING,
+        help="The proxied service's channel used",
+    ),
+    option(
         "--telegram-token",
         required=False,
         type=STRING,
@@ -422,6 +434,10 @@ def run(ctx: Context, **kwargs: dict[str, Any]) -> None:
         db_name=kwargs.pop("db_name", "infinity_grid"),
     )
     notification_config = NotificationConfigDTO(
+        http=HttpConfigDTO(
+            channel=kwargs.pop("http_channel", None)
+            proxy_http_api=kwargs.pop("proxy_http_api", None),
+        ),
         telegram=TelegramConfigDTO(
             token=kwargs.pop("telegram_token", None),
             chat_id=kwargs.pop("telegram_chat_id", None),
