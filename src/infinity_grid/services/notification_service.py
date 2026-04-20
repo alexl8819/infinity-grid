@@ -30,7 +30,7 @@ class NotificationService:
                 chat_id=self.__config.telegram.chat_id,
                 thread_id=self.__config.telegram.thread_id,
             )
-        else if self.__config.http and self.__config.http.enabled:
+        elif self.__config.http and self.__config.http.enabled:
             self.add_http_channel(
                 channel=self.__config.http.channel,
                 proxy_http_api=self.__config.http.proxy_http_api
