@@ -30,27 +30,27 @@ class NotificationService:
                 chat_id=self.__config.telegram.chat_id,
                 thread_id=self.__config.telegram.thread_id,
             )
-        else if self.__config.matrix and self.__config.matrix.proxy_api:
-            self.add_matrix_channel(
-                channel=self.__config.matrix.channel,
-                proxy_api=self.__config.matrix.proxy_api
+        else if self.__config.http and self.__config.http.enabled:
+            self.add_http_channel(
+                channel=self.__config.http.channel,
+                proxy_http_api=self.__config.http.proxy_http_api
             )
 
     def add_channel(self: Self, channel: INotificationChannel) -> None:
         """Add a notification channel to the service."""
         self.__channels.append(channel)
     
-    def add_matrix_channel(
+    def add_http_channel(
         self: Self,
         channel: str,
-        proxy_api: str
+        proxy_http_api: str
     ) -> None:
         from infinity_grid.adapters.notification import (  # pylint: disable=import-outside-toplevel # noqa: PLC0415
-            MatrixNotificationChannelAdapter,
+            HttpNotificationChannelAdapter,
         )
 
         self.add_channel(
-            MatrixNotificationChannelAdapter(proxy_api, channel)
+            HttpNotificationChannelAdapter(proxy_http_api, channel)
         )
 
     def add_telegram_channel(

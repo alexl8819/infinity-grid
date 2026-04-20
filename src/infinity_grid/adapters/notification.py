@@ -14,19 +14,21 @@ from infinity_grid.interfaces import INotificationChannel
 
 LOG = getLogger(__name__)
 
-class MatrixNotificationChannelAdapter(INotificationChannel):
-    """ Matrix implementation of the notification channel."""
+class HttpNotificationChannelAdapter(INotificationChannel):
+    """ Generic implementation of the notification channel. 
+        Sends messages to a http proxy to send messages to any service
+    """
     
     def __init__(
         self: Self,
-        proxy_api: str,
+        proxy_http_api: str,
         channel: str
     ) -> None:
-        self.__base_url = proxy_api
+        self.__base_url = proxy_http_api
         self.__channel = channel
 
     def send(self: Self, message: str) -> bool:
-        LOG.debug("Sending Matrix notification: %s", message)
+        LOG.debug("Sending notification: %s", message)
         try:
             response = requests.post(
                 f"{self.__base_url}/sendMessage",
@@ -38,7 +40,7 @@ class MatrixNotificationChannelAdapter(INotificationChannel):
             )
             return response.status_code == 200
         except Exception as exc:
-            LOG.error("Failed to send Matrix notification", exc_info=exc)
+            LOG.error("Failed to send notification", exc_info=exc)
             return False
 
 
