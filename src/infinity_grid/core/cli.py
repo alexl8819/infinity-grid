@@ -435,7 +435,7 @@ def run(ctx: Context, **kwargs: dict[str, Any]) -> None:
     )
     notification_config = NotificationConfigDTO(
         http=HttpConfigDTO(
-            channel=kwargs.pop("http_channel", None)
+            channel=kwargs.pop("http_channel", None),
             proxy_http_api=kwargs.pop("proxy_http_api", None),
         ),
         telegram=TelegramConfigDTO(
