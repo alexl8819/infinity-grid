@@ -14,6 +14,33 @@ from infinity_grid.interfaces import INotificationChannel
 
 LOG = getLogger(__name__)
 
+class MatrixNotificationChannelAdapter(INotificationChannel):
+    """ Matrix implementation of the notification channel."""
+    
+    def __init__(
+        self: Self,
+        proxy_api: str,
+        channel: str
+    ) -> None:
+        self.__base_url = proxy_api
+        self.__channel = channel
+
+    def send(self: self, message: str) -> bool:
+        LOG.debug("Sending Matrix notification: %s", message)
+        try:
+            response = requests.post(
+                f"{self.__base_url}/sendMessage",
+                data={
+                    "channel": self.__channel,
+                    "text": message,
+                },
+                timeout=10,
+            )
+            return response.status_code == 200
+        except Exception as exc:
+            LOG.error("Failed to send Matrix notification", exc_info=exc)
+            return False
+
 
 class TelegramNotificationChannelAdapter(INotificationChannel):
     """Telegram implementation of the notification channel."""
