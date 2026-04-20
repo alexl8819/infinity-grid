@@ -20,6 +20,7 @@ from infinity_grid.models.configuration import (
     MetricsConfigDTO,
     NotificationConfigDTO,
     TelegramConfigDTO,
+    HttpConfigDTO,
 )
 
 LOG = getLogger(__name__)
