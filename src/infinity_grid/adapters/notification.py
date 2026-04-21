@@ -28,11 +28,12 @@ class HttpNotificationChannelAdapter(INotificationChannel):
         self.__channel = channel
 
     def send(self: Self, message: str) -> bool:
+        print('sending message via HttpNotificationChannelAdapter')
         LOG.debug("Sending notification: %s", message)
         try:
             response = requests.post(
                 f"{self.__base_url}/sendMessage",
-                data={
+                json={
                     "channel": self.__channel,
                     "text": message,
                 },
