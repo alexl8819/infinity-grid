@@ -21,10 +21,10 @@ class HttpNotificationChannelAdapter(INotificationChannel):
     
     def __init__(
         self: Self,
-        proxy_http_api: str,
+        proxy_api: str,
         channel: str
     ) -> None:
-        self.__base_url = proxy_http_api
+        self.__base_url = proxy_api
         self.__channel = channel
 
     def send(self: Self, message: str) -> bool:

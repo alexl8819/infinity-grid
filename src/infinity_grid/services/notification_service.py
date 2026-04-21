@@ -33,7 +33,7 @@ class NotificationService:
         elif self.__config.http and self.__config.http.enabled:
             self.add_http_channel(
                 channel=self.__config.http.channel,
-                proxy_http_api=self.__config.http.proxy_http_api
+                proxy_api=self.__config.http.proxy_api
             )
 
     def add_channel(self: Self, channel: INotificationChannel) -> None:
@@ -43,14 +43,14 @@ class NotificationService:
     def add_http_channel(
         self: Self,
         channel: str,
-        proxy_http_api: str
+        proxy_api: str
     ) -> None:
         from infinity_grid.adapters.notification import (  # pylint: disable=import-outside-toplevel # noqa: PLC0415
             HttpNotificationChannelAdapter,
         )
 
         self.add_channel(
-            HttpNotificationChannelAdapter(proxy_http_api, channel)
+            HttpNotificationChannelAdapter(proxy_api, channel)
         )
 
     def add_telegram_channel(

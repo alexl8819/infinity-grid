@@ -147,13 +147,13 @@ class TelegramConfigDTO(BaseModel):
 class HttpConfigDTO(BaseModel):
     """Pydantic model for HTTP notification configuration """
 
-    proxy_http_api: str | None = None
+    proxy_api: str | None = None
     channel: str | None = None
 
     @computed_field
     def enabled(self) -> bool:
         """ Return True if proxy_http_api and channel are truthy values. """
-        return bool(self.proxy_http_api and self.channel)
+        return bool(self.proxy_api and self.channel)
 
 class NotificationConfigDTO(BaseModel):
     """Pydantic model for notification service configuration."""
