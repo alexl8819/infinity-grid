@@ -361,7 +361,7 @@ def cli(ctx: Context, **kwargs: dict) -> None:
 @option_group(
     "Notification Options",
     option(
-        "--proxy-http-api",
+        "--http-proxy-api",
         required=False,
         type=STRING,
         help="The http proxy api url to use.",
@@ -437,7 +437,7 @@ def run(ctx: Context, **kwargs: dict[str, Any]) -> None:
     notification_config = NotificationConfigDTO(
         http=HttpConfigDTO(
             channel=kwargs.pop("http_channel", None),
-            proxy_http_api=kwargs.pop("proxy_http_api", None),
+            proxy_api=kwargs.pop("http_proxy_api", None),
         ),
         telegram=TelegramConfigDTO(
             token=kwargs.pop("telegram_token", None),
