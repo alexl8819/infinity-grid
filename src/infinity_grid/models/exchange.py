@@ -54,6 +54,9 @@ class AssetPairInfoSchema(BaseModel):
     #: Fees for maker orders, e.g. [[0, 0.25], [10000, 0.2], ...]
     fees_maker: list[list[float]] = Field(..., description="Maker fees structure")
 
+class TradingVolumeInfoSchema(BaseModel):
+    """Schema for trading volume information"""
+    fees_maker: dict = Field(..., description="Maker fees")
 
 class OrderInfoSchema(BaseModel):
     """Schema for order information"""

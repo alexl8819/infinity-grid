@@ -68,6 +68,7 @@ from infinity_grid.models.exchange import (
     OrderInfoSchema,
     PairBalanceSchema,
     TickerUpdateSchema,
+    TradingVolumeInfoSchema,
 )
 
 LOG = getLogger(__name__)
@@ -352,6 +353,12 @@ class KrakenExchangeRESTServiceAdapter(IExchangeRESTService):
             ),
         )
         return balances
+    
+    def get_trading_volume(self: self, pair: str) -> TradingVolumeInfoSchema:
+        vol = self.__user_service.get_trade_volume(pair)
+        return TradingVolumeInfoSchema(
+            fees_maker=vol['fees_maker']
+        )
 
     @cached_property
     def ws_symbol(self: Self) -> str:

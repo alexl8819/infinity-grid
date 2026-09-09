@@ -376,7 +376,9 @@ class GridStrategyBase:
         if self._config.fee is None:
             # This is the case if the '--fee' parameter was not passed, then we
             # take the highest maker fee.
-            self._config.fee = float(pair_info.fees_maker[0][1]) / 100
+            pairquote = f"{pair_info.base}{pair_info.quote}".upper()
+            rolling_tv = self._rest_api.get_trading_volume(pair=pairquote)
+            self._config.fee = float(rolling_tv.fees_maker[pairquote]['fee']) / 100
 
         self._cost_decimals = pair_info.cost_decimals
         self._amount_per_grid_plus_fee = self._config.amount_per_grid * (

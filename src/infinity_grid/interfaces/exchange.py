@@ -171,6 +171,13 @@ class IExchangeRESTService(ABC):
             "This method must be implemented in the concrete exchange class.",
         )
 
+    @abstractmethod
+    def get_trading_volume(self: Self, pair: str) -> TradingVolumeInfoSchema:
+        """ Get the 30-day trading volume for a specific pair """
+        raise NotImplementedError(
+            "This method must be implemented in the concrete exchange class."
+        )
+
     @property
     @abstractmethod
     def rest_symbol(self: Self) -> str:
